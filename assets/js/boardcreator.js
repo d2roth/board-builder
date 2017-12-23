@@ -4,7 +4,7 @@ var json = {
     "height":25
   },
   "tiles":["grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","brick","brick","brick","brick","door","door","door","door","door","brick","brick","brick","brick","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass"]};
-var table = $('table')[0];
+var table = document.getElementById('board');
 
 function mapCell(type, x, y, width, height){
   if(typeof width === 'undefined')
@@ -14,9 +14,12 @@ function mapCell(type, x, y, width, height){
     
   for(var left = x; left < (x + width); left++){
     for(var top = y; top < (y + height); top++){
-      $('tr:nth-child(' + top + ') td:nth-child(' + left + ')' )
-        .addClass(type)
-        .text(left + 'x' + top);
+      var element = document.querySelectorAll('tr:nth-child(' + top + ') td:nth-child(' + left + ')' )[0];
+      if (element.classList)
+        element.classList.add(type);
+      else
+        element.className += ' ' + type;
+      element.innerText = left + 'x' + top;
     }
   }
 }
@@ -37,11 +40,11 @@ function buildTable(width, height){
 }
 buildTable(json.board.width, json.board.height);
 var size = Math.sqrt(json.tiles.length);
-$(json.tiles).each(function(index){
+Array.prototype.forEach.call(json.tiles, function(el, index){
   //var index = index+1;
   var x = (index%size)+1;
   var y =  Math.floor(index/size)+1;
-  mapCell(''+this, x, y, 1, 1);
+  mapCell(''+el, x, y, 1, 1);
 });
 
 /* Functions strictly for Map Builder */
