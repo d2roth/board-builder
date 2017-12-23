@@ -1,27 +1,39 @@
-var json = {
-  "board": {
-    "width":25,
-    "height":25
-  },
-  "tiles":["grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","brick","brick","brick","brick","door","door","door","door","door","brick","brick","brick","brick","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass"]};
-var table = document.getElementById('board');
+// Convert strings to title case
+function titleCase(str) {
+   var chars = str.toLowerCase().split(' ');
+   for (var i = 0; i < chars.length; i++) {
+      chars[i] = chars[i].charAt(0).toUpperCase() + chars[i].substring(1);     
+   };
+   return chars.join(' '); 
+}
 
-function mapCell(type, x, y, width, height){
-  if(typeof width === 'undefined')
-    var width = 1;
-  if(typeof height === 'undefined')
-    var height = 1;
-    
-  for(var left = x; left < (x + width); left++){
-    for(var top = y; top < (y + height); top++){
-      var element = document.querySelectorAll('tr:nth-child(' + top + ') td:nth-child(' + left + ')' )[0];
-      if (element.classList)
-        element.classList.add(type);
-      else
-        element.className += ' ' + type;
-      element.innerText = left + 'x' + top;
-    }
-  }
+
+function mapCell(type, x, y){
+  x = x+1;
+  y = y+1;
+  var element = document.querySelectorAll('tr:nth-child(' + y + ') td:nth-child(' + x + ')' );
+  element = element[0];
+
+  // Remove classes
+  element.className = '';
+
+  // Set the inner text to the row/columns
+  element.innerText = x + 'x' + y;
+
+  // Return if we are not adding any classes
+  if(type == "")
+    return;
+  
+  // Split the classes so we can add each individually
+  var classes = type.toLowerCase().split(' ');
+
+  // Add each class individually
+  Array.prototype.forEach.call(classes, function(cls, i){
+    if (element.classList)
+      element.classList.add(cls);
+    else
+      element.className += ' ' + cls;
+  });
 }
 
 function buildTable(width, height){
@@ -38,17 +50,134 @@ function buildTable(width, height){
     table.appendChild(clone);
   }
 }
-buildTable(json.board.width, json.board.height);
-var size = Math.sqrt(json.tiles.length);
-Array.prototype.forEach.call(json.tiles, function(el, index){
-  //var index = index+1;
-  var x = (index%size)+1;
-  var y =  Math.floor(index/size)+1;
-  mapCell(''+el, x, y, 1, 1);
-});
 
-/* Functions strictly for Map Builder */
-// document.getElementsByTagName('td')
+/*
+ * @return string containing all the information to generate a map in the format of type
+ */
+function getExport(type){
+  var results = [];
+
+  switch(type){
+
+    case 'json_flat':
+      var elements = document.querySelectorAll('td');
+      Array.prototype.forEach.call(elements, function(el, i){
+        results.push(titleCase(el.className));
+      });
+      results = JSON.stringify(results);
+      break;
+
+    case 'json_rows':
+      var rows = table.querySelectorAll('tr');
+      Array.prototype.forEach.call(rows, function(row, i){
+        var cols = row.querySelectorAll('td');
+        var row_json = [];
+        Array.prototype.forEach.call(cols, function(col, i){
+          row_json.push(titleCase(col.className));
+        });
+        results.push(row_json)
+      });
+      results = JSON.stringify(results);
+      break;
+
+    case 'lines':
+      var line = json.board.width;
+      var elements = document.querySelectorAll('td');
+      results.push("Row{");
+      Array.prototype.forEach.call(elements, function(el, i){
+        if (i % line == 0 && i != 0){
+          results.push("}\nRow{")
+        }
+        // Captializing the first letter of each class
+        results.push(titleCase(el.className));
+      });
+      results.push("}")
+      results = results.join("\n");
+      break;
+  }
+
+  return results;
+}
+
+/*
+ * Takes the data from #data and maps it onto the table
+ */
+function getImport(type){
+  // The source data
+  var data = document.getElementById('data').value;
+
+  switch(type){
+
+    // Flat json string with each cell as an element
+    case 'json_flat':
+      // Convert the data into a JSON string so we can properly use is
+      data = JSON.parse(data);
+
+      Array.prototype.forEach.call(data, function(cell_type, index){
+        //var index = index+1;
+        var x = (index%json.board.width);
+        var y =  Math.floor(index/json.board.height);
+        mapCell(''+cell_type, x, y);
+      });
+      break;
+
+    // 
+    case 'json_rows':
+      // Get the data the way we need
+      data = JSON.parse(data);
+
+      // Loop through each row in the data
+      Array.prototype.forEach.call(data, function(row, row_index){
+        // Loop through each cell in the row
+        Array.prototype.forEach.call(row, function(cell_type, cell_index){
+          // Map the cell
+          mapCell(''+cell_type, cell_index, row_index);
+        });
+      });
+      break;
+
+    // Not implemented yet
+    case 'lines':
+      // Get the data the way we need it
+      data = data.replace("\r\n", "\n");
+
+      var rows = data.split('Row{');
+      // Remove the first opening row
+      rows.shift();
+
+      Array.prototype.forEach.call(rows, function(row, row_index){
+        // Remove trailing }
+        var row = row.replace(/\}\n?$/g, "");
+        //var row = row.trim();
+        var cols = row.split("\n");
+        console.log(cols);
+
+        Array.prototype.forEach.call(cols, function(cell_type, cell_index){
+          mapCell(''+cell_type, cell_index, row_index);
+        });
+      });
+      break;
+  }
+}
+
+
+/* This is in the format of json_flat. Check out the files in the examples folder for other tile structiures */
+var json = {
+  "board": {
+    "width":25,
+    "height":25
+  },
+  "tiles":["grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","carpet","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","brick","brick","brick","brick","brick","door","door","door","door","door","brick","brick","brick","brick","brick","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass"]};
+var table = document.getElementById('board');
+
+buildTable(json.board.width, json.board.height);
+
+/* Set the initial board up */
+document.getElementById('data').value = JSON.stringify(json.tiles);
+getImport('json_flat');
+
+
+
 document.getElementsByTagName('body')[0].addEventListener('click', function(e){
   if(e.target.nodeName != "TD")
     return;
@@ -71,45 +200,21 @@ document.getElementsByTagName('body')[0].addEventListener('click', function(e){
     target.className = classes.join(' ');
   }
 });
-document.getElementById('export-json').addEventListener('click', getJSON);
-document.getElementById('export-lines').addEventListener('click', getLines);
 
-function getJSON(){
-  var output = document.getElementById('output');
-  var results = {
-    board:{},
-    tiles:[]
-   };
-  results.board.width = document.querySelectorAll('tr:first-child td').length;
-  results.board.height = document.querySelectorAll('tr').length;
-  
-  var elements = document.querySelectorAll('td');
-  Array.prototype.forEach.call(elements, function(el, i){
-    results.tiles.push(el.className);
-  });
-  output.value = JSON.stringify(results);
-}
+// Set our event listener for export
+document.getElementById('export').addEventListener('click', function(){
+  console.log('exporting...');
+  var data = document.getElementById('data');
+  var export_type = document.getElementById('export_type').value;
+
+  data.value = getExport(export_type);
+});
 
 
-function getLines(){
-  var output = document.getElementById('output');
-  var results = [];
-  //Brian: width of the board
-  var line = json.board.width;
-  var elements = document.querySelectorAll('td');
-  //Brian: Starts the whole document
-  results.push("Row{");
-  Array.prototype.forEach.call(elements, function(el, i){
-     //Brian: At the division for each new row
-       if (i % line == 0 && i != 0){ // Caret (ChromeOS programming text-editor says this should be === and not ==, and !== instead of !=)
-      //Brian: Adds the ending and starting
-      results.push("}\nRow{");
-      //Brian:Note: "}Row{" also works in my java LevelGenerator, but I recommend "}\nRow{" for readability
-      //Brian: I'll also add some whitespace to my LevelGenerator so that we could add spaces between each Row element
-    }
-    results.push(el.className);//Brian: we should capitalise the first letter of each tile so (el.classname.capitaliseFirst)
-  });
-  //Brian: ends the last element
-  results.push("}");
-  output.value = results.join("\n");
-}
+// Set our event listener for import
+document.getElementById('import').addEventListener('click', function(){
+  console.log('importing...');
+  var export_type = document.getElementById('export_type').value;
+
+  getImport(export_type);
+});
