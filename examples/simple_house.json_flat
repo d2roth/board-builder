@@ -1,0 +1,33 @@
+var json = {
+  "board": {
+    "width":25,
+    "height":25
+  },
+  "tiles":[
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Carpet","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Brick","Brick","Brick","Brick","Brick","Door","Door","Door","Door","Door","Brick","Brick","Brick","Brick","Brick","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass",
+    "Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass","Grass"
+  ]
+};
